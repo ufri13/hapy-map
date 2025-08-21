@@ -27,6 +27,7 @@
       maxZoom: 18
     }).addTo(map);
 
+    // Datensatz mit exakten Ortsnamen
     const ortsdaten = {
       "Barksen": { einwohner: "469", flaeche: "", dichte: "", nummer: "", besonderheiten: "", sonstiges: "" },
       "Bensen": { einwohner: "287", flaeche: "", dichte: "", nummer: "", besonderheiten: "", sonstiges: "" },
@@ -69,6 +70,7 @@
           onEachFeature: function (feature, layer) {
             const ort = feature.properties.Ortschaft || '';
 
+            // Ausschluss des Umkreis-Polygons
             if (ort !== 'Stadt Hessisch Oldendorf' && ort !== 'Hessisch Oldendorf') {
               const daten = ortsdaten[ort] || {};
               const tooltipContent = `
