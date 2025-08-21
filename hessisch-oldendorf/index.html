@@ -71,11 +71,15 @@
     layer.on('mouseout', function () {
       // Originalfarbe und Transparenz wiederherstellen
       let opacity = (
-        feature.properties.Ortschaft === 'Fischbeck' ? 0.2 :
-        feature.properties.Ortschaft === 'Welsede' ? 0.25 :
-        feature.properties.Ortschaft === 'Hessisch Oldendorf' ? 0.35 :
-        feature.properties.Ortschaft === 'Großenwieden' ? 0.2 :
-        0.3
+      feature.properties.Ortschaft === 'Fischbeck' ? 0.2 :
+      feature.properties.Ortschaft === 'Weibeck' ? 0.25 :
+      feature.properties.Ortschaft === 'Großenwieden' ? 0.2 :
+      feature.properties.Ortschaft === 'Kleinenwieden' ? 0.2 :
+      feature.properties.Ortschaft === 'Welsede' ? 0.25 :
+      feature.properties.Ortschaft === 'Rohdental' ? 0.35 :
+      feature.properties.Ortschaft === 'Segelhorst' ? 0.2 :
+      feature.properties.Ortschaft === 'Stadt Hessisch Oldendorf' ? 0.35 :
+      0.3
       );
       this.setStyle({
         fillColor: '#88ccee',
