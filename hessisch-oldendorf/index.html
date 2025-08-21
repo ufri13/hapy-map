@@ -4,10 +4,7 @@
   <meta charset="utf-8" />
   <title>Interaktive Karte der Stadt Hessisch Oldendorf</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-
   <style>
     #map { height: 100vh; margin: 0; padding: 0; }
     body { margin: 0; }
@@ -22,43 +19,40 @@
 </head>
 <body>
   <div id="map"></div>
-
-  <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
     const map = L.map('map').setView([52.1715, 9.2580], 11);
-
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap',
       maxZoom: 18
     }).addTo(map);
 
-    // Datenstruktur für Tooltips pro Ortsteil
+    // Einwohnerzahlen und Platzhalter für weitere Daten
     const ortsdaten = {
-      "Barksen": { Einwohnerzahl: "469", Fläche: "1,89 qkm", c: "", d: "", e: "", f: "" },
-      "Bensen": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
-      "Fischbeck": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
-      "Friedrichshagen": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
-      "Friedrichsburg": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
-      "Fuhlen": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
-      "Großenwieden": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
-      "Haddessen": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
-      "Heßlingen": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
-      "Hemeringen": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
-      "Hessisch Oldendorf": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
-      "Höfingen": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
-      "Kleinenwieden": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
-      "Krückeberg": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
-      "Lachem": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
-      "Langenfeld": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
-      "Pötzen": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
-      "Rohden": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
-      "Rumbeck": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
-      "Segelhorst": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
-      "Weibeck": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
-      "Welsede": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
-      "Wickbolsen": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
-      "Zersen": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" }
+      "Barksen": { einwohner: "469", flaeche: "", dichte: "", nummer: "", besonderheiten: "", sonstiges: "" },
+      "Bensen": { einwohner: "287", flaeche: "", dichte: "", nummer: "", besonderheiten: "", sonstiges: "" },
+      "Fischbeck": { einwohner: "2.300", flaeche: "", dichte: "", nummer: "", besonderheiten: "", sonstiges: "" },
+      "Friedrichshagen": { einwohner: "132", flaeche: "", dichte: "", nummer: "", besonderheiten: "", sonstiges: "" },
+      "Friedrichsburg": { einwohner: "89", flaeche: "", dichte: "", nummer: "", besonderheiten: "", sonstiges: "" },
+      "Fuhlen": { einwohner: "1.000", flaeche: "", dichte: "", nummer: "", besonderheiten: "", sonstiges: "" },
+      "Großenwieden": { einwohner: "850", flaeche: "", dichte: "", nummer: "", besonderheiten: "", sonstiges: "" },
+      "Haddessen": { einwohner: "320", flaeche: "", dichte: "", nummer: "", besonderheiten: "", sonstiges: "" },
+      "Heßlingen": { einwohner: "180", flaeche: "", dichte: "", nummer: "", besonderheiten: "", sonstiges: "" },
+      "Hemeringen": { einwohner: "1.500", flaeche: "", dichte: "", nummer: "", besonderheiten: "", sonstiges: "" },
+      "Hessisch Oldendorf": { einwohner: "5.300", flaeche: "", dichte: "", nummer: "", besonderheiten: "", sonstiges: "" },
+      "Höfingen": { einwohner: "240", flaeche: "", dichte: "", nummer: "", besonderheiten: "", sonstiges: "" },
+      "Kleinenwieden": { einwohner: "210", flaeche: "", dichte: "", nummer: "", besonderheiten: "", sonstiges: "" },
+      "Krückeberg": { einwohner: "390", flaeche: "", dichte: "", nummer: "", besonderheiten: "", sonstiges: "" },
+      "Lachem": { einwohner: "410", flaeche: "", dichte: "", nummer: "", besonderheiten: "", sonstiges: "" },
+      "Langenfeld": { einwohner: "520", flaeche: "", dichte: "", nummer: "", besonderheiten: "", sonstiges: "" },
+      "Pötzen": { einwohner: "460", flaeche: "", dichte: "", nummer: "", besonderheiten: "", sonstiges: "" },
+      "Rohden": { einwohner: "370", flaeche: "", dichte: "", nummer: "", besonderheiten: "", sonstiges: "" },
+      "Rumbeck": { einwohner: "290", flaeche: "", dichte: "", nummer: "", besonderheiten: "", sonstiges: "" },
+      "Segelhorst": { einwohner: "310", flaeche: "", dichte: "", nummer: "", besonderheiten: "", sonstiges: "" },
+      "Weibeck": { einwohner: "180", flaeche: "", dichte: "", nummer: "", besonderheiten: "", sonstiges: "" },
+      "Welsede": { einwohner: "340", flaeche: "", dichte: "", nummer: "", besonderheiten: "", sonstiges: "" },
+      "Wickbolsen": { einwohner: "260", flaeche: "", dichte: "", nummer: "", besonderheiten: "", sonstiges: "" },
+      "Zersen": { einwohner: "300", flaeche: "", dichte: "", nummer: "", besonderheiten: "", sonstiges: "" }
     };
 
     fetch('daten/hessisch_oldendorf.geojson')
@@ -66,7 +60,6 @@
       .then(data => {
         const geoLayer = L.geoJSON(data, {
           style: function (feature) {
-            const ort = (feature.properties.Ortschaft || '').trim();
             return {
               color: '#555',
               fillColor: '#88ccee',
@@ -76,20 +69,16 @@
           },
           onEachFeature: function (feature, layer) {
             const ort = (feature.properties.Ortschaft || '').trim();
-
-            // Nur für Ortsteile, nicht für das große Umkreis-Polygon
             if (ort.toLowerCase() !== 'stadt hessisch oldendorf' && ort.toLowerCase() !== 'hessisch oldendorf') {
-              layer.bindPopup(`<strong>${ort}</strong>`);
-
               const daten = ortsdaten[ort] || {};
               const tooltipContent = `
                 <strong>${ort}</strong><br>
-                a) Einwohnerzahl: ${daten.Einwohnerzahl  || '<em>noch einzutragen</em>'}<br>
-                b) Fläche: ${daten.b || '<em>noch einzutragen</em>'}<br>
-                c) Bevölkerungsdichte: ${daten.c || '<em>noch einzutragen</em>'}<br>
-                d) Ortsteilnummer: ${daten.d || '<em>noch einzutragen</em>'}<br>
-                e) Besonderheiten: ${daten.e || '<em>noch einzutragen</em>'}<br>
-                f) Sonstiges: ${daten.f || '<em>noch einzutragen</em>'}
+                Einw.: ${daten.einwohner || '<em>noch einzutragen</em>'}<br>
+                Fläche: ${daten.flaeche || '<em>noch einzutragen</em>'}<br>
+                Dichte: ${daten.dichte || '<em>noch einzutragen</em>'}<br>
+                Nr.: ${daten.nummer || '<em>noch einzutragen</em>'}<br>
+                Besonderheiten: ${daten.besonderheiten || '<em>noch einzutragen</em>'}<br>
+                Sonstiges: ${daten.sonstiges || '<em>noch einzutragen</em>'}
               `;
               layer.bindTooltip(tooltipContent, {
                 sticky: true,
@@ -114,7 +103,6 @@
             }
           }
         }).addTo(map);
-
         map.fitBounds(geoLayer.getBounds());
       });
   </script>
