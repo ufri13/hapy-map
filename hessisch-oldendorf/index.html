@@ -6,27 +6,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
-#map {
-  height: 100vh;
-  width: 100vw;
-  margin: 0;
-  padding: 0;
-}
-.leaflet-tooltip {
-  background-color: #f9f9f9;
-  border: 1px solid #ccc;
-  padding: 6px;
-  font-size: 13px;
-  line-height: 1.4;
-}
-
-</style>
-
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+    #map {
+      height: 100vh;
+      width: 100vw;
+      margin: 0;
+      padding: 0;
+    }
+    .leaflet-tooltip {
+      background-color: #f9f9f9;
+      border: 1px solid #ccc;
+      padding: 6px;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+  </style>
 </head>
 <body>
   <div id="map"></div>
@@ -68,9 +66,6 @@ html, body {
     fetch('daten/hessisch_oldendorf.geojson')
       .then(response => response.json())
       .then(data => {
-        .catch(e => {
-    alert('Fehler beim Laden der Geodaten!');
-    console.error(e);
         const geoLayer = L.geoJSON(data, {
           style: function (feature) {
             return {
@@ -122,6 +117,10 @@ html, body {
           }
         }).addTo(map);
         map.fitBounds(geoLayer.getBounds());
+      })
+      .catch(e => {
+        alert('Fehler beim Laden der Geodaten!');
+        console.error(e);
       });
   </script>
 </body>
