@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ahl<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8" />
@@ -35,30 +35,30 @@
 
     // Datenstruktur für Tooltips pro Ortsteil
     const ortsdaten = {
-      "Barksen": { Einw.: "469", Fläche: "1,89 qkm", c: "", d: "", e: "", f: "" },
-      "Bensen": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
-      "Fischbeck": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
-      "Friedrichshagen": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
-      "Friedrichsburg": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
-      "Fuhlen": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
-      "Großenwieden": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
-      "Haddessen": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
-      "Heßlingen": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
-      "Hemeringen": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
-      "Hessisch Oldendorf": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
-      "Höfingen": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
-      "Kleinenwieden": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
-      "Krückeberg": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
-      "Lachem": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
-      "Langenfeld": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
-      "Pötzen": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
-      "Rohden": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
-      "Rumbeck": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
-      "Segelhorst": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
-      "Weibeck": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
-      "Welsede": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
-      "Wickbolsen": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
-      "Zersen": { Einw.: "", b: "", c: "", d: "", e: "", f: "" }
+      "Barksen": { Einwohnerzahl: "469", Fläche: "1,89 qkm", c: "", d: "", e: "", f: "" },
+      "Bensen": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
+      "Fischbeck": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
+      "Friedrichshagen": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
+      "Friedrichsburg": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
+      "Fuhlen": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
+      "Großenwieden": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
+      "Haddessen": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
+      "Heßlingen": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
+      "Hemeringen": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
+      "Hessisch Oldendorf": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
+      "Höfingen": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
+      "Kleinenwieden": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
+      "Krückeberg": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
+      "Lachem": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
+      "Langenfeld": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
+      "Pötzen": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
+      "Rohden": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
+      "Rumbeck": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
+      "Segelhorst": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
+      "Weibeck": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
+      "Welsede": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
+      "Wickbolsen": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" },
+      "Zersen": { Einwohnerzahl:  "", b: "", c: "", d: "", e: "", f: "" }
     };
 
     fetch('daten/hessisch_oldendorf.geojson')
@@ -84,7 +84,7 @@
               const daten = ortsdaten[ort] || {};
               const tooltipContent = `
                 <strong>${ort}</strong><br>
-                a) Einwohnerzahl: ${daten.Einw. || '<em>noch einzutragen</em>'}<br>
+                a) Einwohnerzahl: ${daten.Einwohnerzahl  || '<em>noch einzutragen</em>'}<br>
                 b) Fläche: ${daten.b || '<em>noch einzutragen</em>'}<br>
                 c) Bevölkerungsdichte: ${daten.c || '<em>noch einzutragen</em>'}<br>
                 d) Ortsteilnummer: ${daten.d || '<em>noch einzutragen</em>'}<br>
