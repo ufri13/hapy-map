@@ -20,7 +20,7 @@
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
     // Karte initialisieren
-    var map = L.map('map').setView([52.1715, 9.2580], 13);
+    var map = L.map('map').setView([52.1715, 9.2580], 11);
 
     // Hintergrundkarte laden
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -68,8 +68,8 @@
               this.setStyle({
                 fillColor: '#88ccee',
                 fillOpacity: (
-                  feature.properties.Ortschaft === 'Fischbeck' ? 0.2 :
-                  feature.properties.Ortschaft === 'Welsede' ? 0.25 :
+                  feature.properties.Ortschaft === 'Fischbeck' ? 0.30 :
+                  feature.properties.Ortschaft === 'Welsede' ? 0.2 :
                   feature.properties.Ortschaft === 'Hessisch Oldendorf' ? 0.35 :
                   feature.properties.Ortschaft === 'Großenwieden' ? 0.2 :
                   0.3 // Standard
