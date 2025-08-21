@@ -27,7 +27,6 @@
       maxZoom: 18
     }).addTo(map);
 
-    // ✅ Einwohnerzahlen und Platzhalter für weitere Daten
     const ortsdaten = {
       "Barksen": { einwohner: "469", flaeche: "", dichte: "", nummer: "", besonderheiten: "", sonstiges: "" },
       "Bensen": { einwohner: "287", flaeche: "", dichte: "", nummer: "", besonderheiten: "", sonstiges: "" },
@@ -69,22 +68,21 @@
           },
           onEachFeature: function (feature, layer) {
             const ort = (feature.properties.Ortschaft || '').trim();
-            if (!ortsdaten[ort]) {
-  console.warn(`Kein Datensatz für Ort: "${ort}"`);
-}
 
-
-            // ❌ Umkreis-Polygon ausschließen
             if (ort !== 'Stadt Hessisch Oldendorf') {
-              const daten = ortsdaten[ort] || {};
+              const daten = ortsdaten[ort];
+              if (!daten) {
+                console.warn(`⚠️ Kein Datensatz für Ort: "${ort}"`);
+              }
+
               const tooltipContent = `
                 <strong>${ort}</strong><br>
-                Einw.: ${daten.einwohner || '<em>noch einzutragen</em>'}<br>
-                Fläche: ${daten.flaeche || '<em>noch einzutragen</em>'}<br>
-                Dichte: ${daten.dichte || '<em>noch einzutragen</em>'}<br>
-                Nr.: ${daten.nummer || '<em>noch einzutragen</em>'}<br>
-                Besonderheiten: ${daten.besonderheiten || '<em>noch einzutragen</em>'}<br>
-                Sonstiges: ${daten.sonstiges || '<em>noch einzutragen</em>'}
+                Einw.: ${daten?.einwohner || '<em>noch einzutragen</em>'}<br>
+                Fläche: ${daten?.flaeche || '<em>noch einzutragen</em>'}<br>
+                Dichte: ${daten?.dichte || '<em>noch einzutragen</em>'}<br>
+                Nr.: ${daten?.nummer || '<em>noch einzutragen</em>'}<br>
+                Besonderheiten: ${daten?.besonderheiten || '<em>noch einzutragen</em>'}<br>
+                Sonstiges: ${daten?.sonstiges || '<em>noch einzutragen</em>'}
               `;
               layer.bindTooltip(tooltipContent, {
                 sticky: true,
