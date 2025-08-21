@@ -2,12 +2,15 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Meine Karte</title>
+  <title>Karte Hessisch Oldendorf</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  
   <style>
-    #map { height: 100vh; }
+    #map { height: 100vh; margin: 0; padding: 0; }
+    body { margin: 0; }
   </style>
 </head>
 <body>
@@ -25,26 +28,28 @@
       maxZoom: 18
     }).addTo(map);
 
-    // GeoJSON laden (lokal oder extern)
+    // GeoJSON laden
     fetch('daten/hessisch_oldendorf.geojson')
       .then(response => response.json())
       .then(data => {
-        L.geoJSON(data, {
+        // GeoJSON-Layer mit sanftem Styling
+        var geoLayer = L.geoJSON(data, {
           style: function (feature) {
             return {
-              color: '#555',
-              fillColor: feature.properties.fill || '#88ccee',
-              fillOpacity: 0.4,
-              weight: 1
+              color: '#555',               // Randfarbe
+              fillColor: '#88ccee',        // Füllfarbe
+              fillOpacity: 0.4,            // Transparenz
+              weight: 1                    // Linienbreite
             };
           },
           onEachFeature: function (feature, layer) {
-            layer.bindPopup(feature.properties.name || 'Unbenannt');
+            // Popup mit Ortsnamen oder Fallback
+            layer.bindPopup(feature.properties.Ortschaft || 'Unbenannt');
           }
         }).addTo(map);
 
-	// 🧭 Jetzt automatisch auf die Geometrie zoomen
-    	map.fitBounds(geoLayer.getBounds());
+        // Automatisch auf die geladenen Geometrien zoomen
+        map.fitBounds(geoLayer.getBounds());
       });
   </script>
 </body>
