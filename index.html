@@ -26,7 +26,7 @@
     }).addTo(map);
 
     // GeoJSON laden (lokal oder extern)
-    fetch('daten/Gemeinden_Orte_HaPy.geojson')
+    fetch('daten/Gemeinden_Orte_simple.geojson')
       .then(response => response.json())
       .then(data => {
         L.geoJSON(data, {
@@ -46,3 +46,4 @@
   </script>
 </body>
 </html>
+
