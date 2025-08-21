@@ -111,7 +111,7 @@
         // Zoom automatisch anpassen und dann leicht vergrößern
         map.fitBounds(geoLayer.getBounds());
         map.once('moveend', function () {
-          map.setZoom(map.getZoom() + 1); // Zoomstufe leicht erhöhen
+          map.setZoom(map.getZoom() + 3); // Zoomstufe leicht erhöhen
         });
       });
   </script>
