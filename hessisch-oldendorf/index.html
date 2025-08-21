@@ -33,62 +33,70 @@
       maxZoom: 18
     }).addTo(map);
 
+    // Datenstruktur für Tooltips pro Ortsteil
+    const ortsdaten = {
+      "Barksen": { a: "", b: "", c: "", d: "", e: "", f: "" },
+      "Bensen": { a: "", b: "", c: "", d: "", e: "", f: "" },
+      "Fischbeck": { a: "", b: "", c: "", d: "", e: "", f: "" },
+      "Friedrichshagen": { a: "", b: "", c: "", d: "", e: "", f: "" },
+      "Friedrichsburg": { a: "", b: "", c: "", d: "", e: "", f: "" },
+      "Fuhlen": { a: "", b: "", c: "", d: "", e: "", f: "" },
+      "Großenwieden": { a: "", b: "", c: "", d: "", e: "", f: "" },
+      "Haddessen": { a: "", b: "", c: "", d: "", e: "", f: "" },
+      "Heßlingen": { a: "", b: "", c: "", d: "", e: "", f: "" },
+      "Hemeringen": { a: "", b: "", c: "", d: "", e: "", f: "" },
+      "Hessisch Oldendorf": { a: "", b: "", c: "", d: "", e: "", f: "" },
+      "Höfingen": { a: "", b: "", c: "", d: "", e: "", f: "" },
+      "Kleinenwieden": { a: "", b: "", c: "", d: "", e: "", f: "" },
+      "Krückeberg": { a: "", b: "", c: "", d: "", e: "", f: "" },
+      "Lachem": { a: "", b: "", c: "", d: "", e: "", f: "" },
+      "Langenfeld": { a: "", b: "", c: "", d: "", e: "", f: "" },
+      "Pötzen": { a: "", b: "", c: "", d: "", e: "", f: "" },
+      "Rohden": { a: "", b: "", c: "", d: "", e: "", f: "" },
+      "Rumbeck": { a: "", b: "", c: "", d: "", e: "", f: "" },
+      "Segelhorst": { a: "", b: "", c: "", d: "", e: "", f: "" },
+      "Weibeck": { a: "", b: "", c: "", d: "", e: "", f: "" },
+      "Welsede": { a: "", b: "", c: "", d: "", e: "", f: "" },
+      "Wickbolsen": { a: "", b: "", c: "", d: "", e: "", f: "" },
+      "Zersen": { a: "", b: "", c: "", d: "", e: "", f: "" }
+    };
+
     fetch('daten/hessisch_oldendorf.geojson')
       .then(response => response.json())
       .then(data => {
         const geoLayer = L.geoJSON(data, {
           style: function (feature) {
             const ort = (feature.properties.Ortschaft || '').trim();
-            let opacity = 0.3;
-
-            switch (ort) {
-              case 'Bensen': opacity = 0.25; break;
-              case 'Fischbeck': opacity = 0.2; break;
-              case 'Friedrichsburg': opacity = 0.25; break;
-              case 'Großenwieden': opacity = 0.2; break;
-              case 'Heßlingen': opacity = 0.25; break;
-              case 'Hessisch Oldendorf': opacity = 0.35; break;
-              case 'Höfingen': opacity = 0.25; break;
-              case 'Kleinenwieden': opacity = 0.2; break;
-              case 'Krückeberg': opacity = 0.25; break;
-              case 'Langenfeld': opacity = 0.25; break;
-              case 'Pötzen': opacity = 0.25; break;
-              case 'Rohdental': opacity = 0.35; break;
-              case 'Rumbeck': opacity = 0.25; break;
-              case 'Segelhorst': opacity = 0.2; break;
-              case 'Weibeck': opacity = 0.25; break;
-              case 'Welsede': opacity = 0.25; break;
-            }
-
             return {
               color: '#555',
               fillColor: '#88ccee',
-              fillOpacity: opacity,
+              fillOpacity: 0.3,
               weight: 1
             };
           },
           onEachFeature: function (feature, layer) {
             const ort = (feature.properties.Ortschaft || '').trim();
-            layer.bindPopup(`<strong>${ort}</strong>`);
 
-            // Tooltip mit Platzhaltern für Daten a–f
-            const tooltipContent = `
-              <strong>${ort}</strong><br>
-              a) Einwohnerzahl: <em>noch einzutragen</em><br>
-              b) Fläche: <em>noch einzutragen</em><br>
-              c) Bevölkerungsdichte: <em>noch einzutragen</em><br>
-              d) Ortsteilnummer: <em>noch einzutragen</em><br>
-              e) Besonderheiten: <em>noch einzutragen</em><br>
-              f) Sonstiges: <em>noch einzutragen</em>
-            `;
-            layer.bindTooltip(tooltipContent, {
-              sticky: true,
-              direction: 'top',
-              opacity: 0.9
-            });
+            // Nur für Ortsteile, nicht für das große Umkreis-Polygon
+            if (ort.toLowerCase() !== 'stadt hessisch oldendorf' && ort.toLowerCase() !== 'hessisch oldendorf') {
+              layer.bindPopup(`<strong>${ort}</strong>`);
 
-            // Hover-Effekt nur für innere Ortsteile
-            if (ort.toLowerCase() !== 'hessisch oldendorf') {
+              const daten = ortsdaten[ort] || {};
+              const tooltipContent = `
+                <strong>${ort}</strong><br>
+                a) Einwohnerzahl: ${daten.a || '<em>noch einzutragen</em>'}<br>
+                b) Fläche: ${daten.b || '<em>noch einzutragen</em>'}<br>
+                c) Bevölkerungsdichte: ${daten.c || '<em>noch einzutragen</em>'}<br>
+                d) Ortsteilnummer: ${daten.d || '<em>noch einzutragen</em>'}<br>
+                e) Besonderheiten: ${daten.e || '<em>noch einzutragen</em>'}<br>
+                f) Sonstiges: ${daten.f || '<em>noch einzutragen</em>'}
+              `;
+              layer.bindTooltip(tooltipContent, {
+                sticky: true,
+                direction: 'top',
+                opacity: 0.9
+              });
+
               layer.on('mouseover', function () {
                 this.setStyle({
                   fillColor: '#cceeff',
@@ -98,29 +106,9 @@
               });
 
               layer.on('mouseout', function () {
-                let opacity = 0.3;
-                switch (ort) {
-                  case 'Bensen': opacity = 0.25; break;
-                  case 'Fischbeck': opacity = 0.2; break;
-                  case 'Friedrichsburg': opacity = 0.25; break;
-                  case 'Großenwieden': opacity = 0.2; break;
-                  case 'Heßlingen': opacity = 0.25; break;
-                  case 'Hessisch Oldendorf': opacity = 0.35; break;
-                  case 'Höfingen': opacity = 0.25; break;
-                  case 'Kleinenwieden': opacity = 0.2; break;
-                  case 'Krückeberg': opacity = 0.25; break;
-                  case 'Langenfeld': opacity = 0.25; break;
-                  case 'Pötzen': opacity = 0.25; break;
-                  case 'Rohdental': opacity = 0.35; break;
-                  case 'Rumbeck': opacity = 0.25; break;
-                  case 'Segelhorst': opacity = 0.2; break;
-                  case 'Weibeck': opacity = 0.25; break;
-                  case 'Welsede': opacity = 0.25; break;
-                }
-
                 this.setStyle({
                   fillColor: '#88ccee',
-                  fillOpacity: opacity
+                  fillOpacity: 0.3
                 });
               });
             }
