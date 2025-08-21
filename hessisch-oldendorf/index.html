@@ -2,12 +2,12 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Karte Hessisch Oldendorf</title>
+  <title>Karte Stadt Hessisch Oldendorf</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  
+
   <style>
     #map { height: 100vh; margin: 0; padding: 0; }
     body { margin: 0; }
@@ -19,34 +19,28 @@
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
-    // Karte initialisieren
-    var map = L.map('map').setView([52.1715, 9.2580], 10);
+    var map = L.map('map').setView([52.1715, 9.2580], 11);
 
-    // Hintergrundkarte laden
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap',
       maxZoom: 18
     }).addTo(map);
 
-    // GeoJSON laden
     fetch('daten/hessisch_oldendorf.geojson')
       .then(response => response.json())
       .then(data => {
-        // GeoJSON-Layer mit individuellem Styling und Hover-Effekt
         var geoLayer = L.geoJSON(data, {
           style: function (feature) {
-            // Dynamische Transparenz je nach Ortschaft
-            let opacity = 0.3; // Standardwert
+            let opacity = 0.3;
             switch (feature.properties.Ortschaft) {
               case 'Fischbeck': opacity = 0.2; break;
               case 'Weibeck': opacity = 0.25; break;
-              case 'Hessisch Oldendorf': opacity = 0.35; break;
               case 'Großenwieden': opacity = 0.2; break;
               case 'Kleinenwieden': opacity = 0.2; break;
               case 'Welsede': opacity = 0.25; break;
               case 'Rohdental': opacity = 0.35; break;
               case 'Segelhorst': opacity = 0.2; break;
-              // Weitere Ortsteile hier ergänzen
+              case 'Stadt Hessisch Oldendorf': opacity = 0.35; break; // äußeres Polygon
             }
             return {
               color: '#555',
@@ -56,44 +50,41 @@
             };
           },
           onEachFeature: function (feature, layer) {
-  layer.bindPopup(feature.properties.Ortschaft || 'Unbenannt');
+            layer.bindPopup(feature.properties.Ortschaft || 'Unbenannt');
 
-  // Nur Hover-Effekt, wenn es NICHT der Umkreis ist
-  if (feature.properties.Ortschaft !== 'Stadt Hessisch Oldendorf') {
-    layer.on('mouseover', function () {
-      this.setStyle({
-        fillColor: '#cceeff',
-        fillOpacity: 0.5
-      });
-      this.bringToFront();
-    });
+            // Hover-Effekt nur für die inneren Ortsteile
+            if (feature.properties.Ortschaft !== 'Stadt Hessisch Oldendorf') {
+              layer.on('mouseover', function () {
+                this.setStyle({
+                  fillColor: '#cceeff',
+                  fillOpacity: 0.5
+                });
+                this.bringToFront();
+              });
 
-    layer.on('mouseout', function () {
-      // Originalfarbe und Transparenz wiederherstellen
-     let opacity = (
-  feature.properties.Ortschaft === 'Fischbeck' ? 0.2 :
-  feature.properties.Ortschaft === 'Weibeck' ? 0.25 :
-  feature.properties.Ortschaft === 'Hessisch oldendorf' ? 0.2 :
-  feature.properties.Ortschaft === 'Großenwieden' ? 0.2 :
-  feature.properties.Ortschaft === 'Kleinenwieden' ? 0.2 :
-  feature.properties.Ortschaft === 'Welsede' ? 0.25 :
-  feature.properties.Ortschaft === 'Rohdental' ? 0.35 :
-  feature.properties.Ortschaft === 'Segelhorst' ? 0.2 :
-  0.3 // ✅ Standardwert
-);
-      );
-      this.setStyle({
-        fillColor: '#88ccee',
-        fillOpacity: opacity
-      });
-    });
-  }
-}
-).addTo(map);
+              layer.on('mouseout', function () {
+                let opacity = (
+                  feature.properties.Ortschaft === 'Fischbeck' ? 0.2 :
+                  feature.properties.Ortschaft === 'Weibeck' ? 0.25 :
+                  feature.properties.Ortschaft === 'Großenwieden' ? 0.2 :
+                  feature.properties.Ortschaft === 'Kleinenwieden' ? 0.2 :
+                  feature.properties.Ortschaft === 'Welsede' ? 0.25 :
+                  feature.properties.Ortschaft === 'Rohdental' ? 0.35 :
+                  feature.properties.Ortschaft === 'Segelhorst' ? 0.2 :
+                  0.3 // Standardwert
+                );
+                this.setStyle({
+                  fillColor: '#88ccee',
+                  fillOpacity: opacity
+                });
+              });
+            }
+          }
+        }).addTo(map);
 
-        // Zoom auf die geladenen Geometrien
         map.fitBounds(geoLayer.getBounds());
       });
   </script>
 </body>
 </html>
+
