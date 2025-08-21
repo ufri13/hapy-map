@@ -108,12 +108,16 @@
           }
         }).addTo(map);
 
-        // Zoom automatisch anpassen und dann leicht vergrößern
+        // Fit to bounds, then delay zoom increase for stable rendering
         map.fitBounds(geoLayer.getBounds());
-        map.once('moveend', function () {
-          map.setZoom(map.getZoom() + 3); // Zoomstufe leicht erhöhen
+
+        map.whenReady(() => {
+          setTimeout(() => {
+            map.setZoom(map.getZoom() + 1); // Hier kannst du ggf. +2 oder +3 verwenden
+          }, 300); // 300 ms warten – anpassbar
         });
       });
   </script>
 </body>
 </html>
+
