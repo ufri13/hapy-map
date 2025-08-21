@@ -26,7 +26,7 @@
     }).addTo(map);
 
     // GeoJSON laden (lokal oder extern)
-    fetch('../daten/Gemeinden_Orte_HaPy.geojson')
+    fetch('../daten/hessisch_oldendorf.geojson')
       .then(response => response.json())
       .then(data => {
         L.geoJSON(data, {
