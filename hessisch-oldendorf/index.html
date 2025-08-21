@@ -56,32 +56,35 @@
             };
           },
           onEachFeature: function (feature, layer) {
-            // Popup mit Ortsnamen
-            layer.bindPopup(feature.properties.Ortschaft || 'Unbenannt');
+  layer.bindPopup(feature.properties.Ortschaft || 'Unbenannt');
 
-            // Hover-Effekt: Farbe und Transparenz ändern
-            layer.on('mouseover', function () {
-              this.setStyle({
-                fillColor: '#cceeff',
-                fillOpacity: 0.5
-              });
-              this.bringToFront();
-            });
+  // Nur Hover-Effekt, wenn es NICHT der Umkreis ist
+  if (feature.properties.Ortschaft !== 'Umkreis') {
+    layer.on('mouseover', function () {
+      this.setStyle({
+        fillColor: '#cceeff',
+        fillOpacity: 0.5
+      });
+      this.bringToFront();
+    });
 
-            layer.on('mouseout', function () {
-              this.setStyle({
-                fillColor: '#cceeff',
-                fillOpacity: (
-                  feature.properties.Ortschaft === 'Fischbeck' ? 0.30 :
-                  feature.properties.Ortschaft === 'Welsede' ? 0.2 :
-                  feature.properties.Ortschaft === 'Hessisch Oldendorf' ? 0.35 :
-                  feature.properties.Ortschaft === 'Großenwieden' ? 0.2 :
-                  0.3 // Standard
-                )
-              });
-            });
-          }
-        }).addTo(map);
+    layer.on('mouseout', function () {
+      // Originalfarbe und Transparenz wiederherstellen
+      let opacity = (
+        feature.properties.Ortschaft === 'Fischbeck' ? 0.2 :
+        feature.properties.Ortschaft === 'Welsede' ? 0.25 :
+        feature.properties.Ortschaft === 'Hessisch Oldendorf' ? 0.35 :
+        feature.properties.Ortschaft === 'Großenwieden' ? 0.2 :
+        0.3
+      );
+      this.setStyle({
+        fillColor: '#88ccee',
+        fillOpacity: opacity
+      });
+    });
+  }
+}
+).addTo(map);
 
         // Zoom auf die geladenen Geometrien
         map.fitBounds(geoLayer.getBounds());
