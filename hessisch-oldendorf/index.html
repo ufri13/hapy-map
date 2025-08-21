@@ -20,7 +20,7 @@
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
     // Karte initialisieren
-    var map = L.map('map').setView([52.1715, 9.2580], 11);
+    var map = L.map('map').setView([52.1715, 9.2580], 10);
 
     // Hintergrundkarte laden
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -58,8 +58,8 @@
             // Hover-Effekt: Farbe und Transparenz ändern
             layer.on('mouseover', function () {
               this.setStyle({
-                fillColor: '#ffcc00',
-                fillOpacity: 0.6
+                fillColor: '#cceeff',
+                fillOpacity: 0.5
               });
               this.bringToFront();
             });
