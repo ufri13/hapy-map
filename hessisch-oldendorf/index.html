@@ -57,6 +57,9 @@
     fetch('daten/hessisch_oldendorf.geojson')
       .then(response => response.json())
       .then(data => {
+        .catch(e => {
+    alert('Fehler beim Laden der Geodaten!');
+    console.error(e);
         const geoLayer = L.geoJSON(data, {
           style: function (feature) {
             return {
