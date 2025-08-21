@@ -20,7 +20,7 @@
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
     // Karte initialisieren
-    var map = L.map('map').setView([52.1715, 9.2580], 13); // Zentrum & Zoom
+    var map = L.map('map').setView([52.1715, 9.2580], 13);
 
     // Hintergrundkarte laden
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -32,23 +32,54 @@
     fetch('daten/hessisch_oldendorf.geojson')
       .then(response => response.json())
       .then(data => {
-        // GeoJSON-Layer mit sanftem Styling
+        // GeoJSON-Layer mit individuellem Styling und Hover-Effekt
         var geoLayer = L.geoJSON(data, {
           style: function (feature) {
+            // Dynamische Transparenz je nach Ortschaft
+            let opacity = 0.3; // Standardwert
+            switch (feature.properties.Ortschaft) {
+              case 'Fischbeck': opacity = 0.2; break;
+              case 'Welsede': opacity = 0.25; break;
+              case 'Hessisch Oldendorf': opacity = 0.35; break;
+              case 'Großenwieden': opacity = 0.2; break;
+              // Weitere Ortsteile hier ergänzen
+            }
             return {
-              color: '#555',               // Randfarbe
-              fillColor: '#88ccee',        // Füllfarbe
-              fillOpacity: 0.4,            // Transparenz
-              weight: 1                    // Linienbreite
+              color: '#555',
+              fillColor: '#88ccee',
+              fillOpacity: opacity,
+              weight: 1
             };
           },
           onEachFeature: function (feature, layer) {
-            // Popup mit Ortsnamen oder Fallback
+            // Popup mit Ortsnamen
             layer.bindPopup(feature.properties.Ortschaft || 'Unbenannt');
+
+            // Hover-Effekt: Farbe und Transparenz ändern
+            layer.on('mouseover', function () {
+              this.setStyle({
+                fillColor: '#ffcc00',
+                fillOpacity: 0.6
+              });
+              this.bringToFront();
+            });
+
+            layer.on('mouseout', function () {
+              this.setStyle({
+                fillColor: '#88ccee',
+                fillOpacity: (
+                  feature.properties.Ortschaft === 'Fischbeck' ? 0.2 :
+                  feature.properties.Ortschaft === 'Welsede' ? 0.25 :
+                  feature.properties.Ortschaft === 'Hessisch Oldendorf' ? 0.35 :
+                  feature.properties.Ortschaft === 'Großenwieden' ? 0.2 :
+                  0.3 // Standard
+                )
+              });
+            });
           }
         }).addTo(map);
 
-        // Automatisch auf die geladenen Geometrien zoomen
+        // Zoom auf die geladenen Geometrien
         map.fitBounds(geoLayer.getBounds());
       });
   </script>
