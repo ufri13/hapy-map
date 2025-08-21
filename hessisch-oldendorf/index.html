@@ -59,7 +59,7 @@
   layer.bindPopup(feature.properties.Ortschaft || 'Unbenannt');
 
   // Nur Hover-Effekt, wenn es NICHT der Umkreis ist
-  if (feature.properties.Ortschaft !== 'Umkreis') {
+  if (feature.properties.Ortschaft !== 'Stadt Hessisch Oldendorf') {
     layer.on('mouseover', function () {
       this.setStyle({
         fillColor: '#cceeff',
