@@ -25,7 +25,7 @@
                                     );
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap',
-      maxZoom: 18
+      maxZoom: 13
     }).addTo(map);
 
     const ortsdaten = {
@@ -114,7 +114,7 @@
 
         map.whenReady(() => {
           setTimeout(() => {
-            map.setZoom(map.getZoom() + 1); // Hier kannst du ggf. +2 oder +3 verwenden
+            map.setZoom(map.getZoom() + 0); // Hier kannst du ggf. +2 oder +3 verwenden
           }, 300); // 300 ms warten – anpassbar
         });
       });
