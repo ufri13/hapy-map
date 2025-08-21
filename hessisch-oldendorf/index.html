@@ -69,6 +69,10 @@
           },
           onEachFeature: function (feature, layer) {
             const ort = (feature.properties.Ortschaft || '').trim();
+            if (!ortsdaten[ort]) {
+  console.warn(`Kein Datensatz für Ort: "${ort}"`);
+}
+
 
             // ❌ Umkreis-Polygon ausschließen
             if (ort !== 'Stadt Hessisch Oldendorf') {
