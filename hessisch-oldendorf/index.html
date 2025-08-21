@@ -39,9 +39,13 @@
             let opacity = 0.3; // Standardwert
             switch (feature.properties.Ortschaft) {
               case 'Fischbeck': opacity = 0.2; break;
-              case 'Welsede': opacity = 0.25; break;
+              case 'Weibeck': opacity = 0.25; break;
               case 'Hessisch Oldendorf': opacity = 0.35; break;
               case 'Großenwieden': opacity = 0.2; break;
+              case 'Kleinenwieden': opacity = 0.2; break;
+              case 'Welsede': opacity = 0.25; break;
+              case 'Rohdental': opacity = 0.35; break;
+              case 'Segelhorst': opacity = 0.2; break;
               // Weitere Ortsteile hier ergänzen
             }
             return {
@@ -66,7 +70,7 @@
 
             layer.on('mouseout', function () {
               this.setStyle({
-                fillColor: '#88ccee',
+                fillColor: '#cceeff',
                 fillOpacity: (
                   feature.properties.Ortschaft === 'Fischbeck' ? 0.30 :
                   feature.properties.Ortschaft === 'Welsede' ? 0.2 :
