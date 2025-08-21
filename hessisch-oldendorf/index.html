@@ -36,29 +36,29 @@ nwohner<!DOCTYPE html>
     // Datenstruktur für Tooltips pro Ortsteil
     const ortsdaten = {
       "Barksen": { Einw.: "469", Fläche: "1,89 qkm", c: "", d: "", e: "", f: "" },
-      "Bensen": { a: "", b: "", c: "", d: "", e: "", f: "" },
-      "Fischbeck": { a: "", b: "", c: "", d: "", e: "", f: "" },
-      "Friedrichshagen": { a: "", b: "", c: "", d: "", e: "", f: "" },
-      "Friedrichsburg": { a: "", b: "", c: "", d: "", e: "", f: "" },
-      "Fuhlen": { a: "", b: "", c: "", d: "", e: "", f: "" },
-      "Großenwieden": { a: "", b: "", c: "", d: "", e: "", f: "" },
-      "Haddessen": { a: "", b: "", c: "", d: "", e: "", f: "" },
-      "Heßlingen": { a: "", b: "", c: "", d: "", e: "", f: "" },
-      "Hemeringen": { a: "", b: "", c: "", d: "", e: "", f: "" },
-      "Hessisch Oldendorf": { a: "", b: "", c: "", d: "", e: "", f: "" },
-      "Höfingen": { a: "", b: "", c: "", d: "", e: "", f: "" },
-      "Kleinenwieden": { a: "", b: "", c: "", d: "", e: "", f: "" },
-      "Krückeberg": { a: "", b: "", c: "", d: "", e: "", f: "" },
-      "Lachem": { a: "", b: "", c: "", d: "", e: "", f: "" },
-      "Langenfeld": { a: "", b: "", c: "", d: "", e: "", f: "" },
-      "Pötzen": { a: "", b: "", c: "", d: "", e: "", f: "" },
-      "Rohden": { a: "", b: "", c: "", d: "", e: "", f: "" },
-      "Rumbeck": { a: "", b: "", c: "", d: "", e: "", f: "" },
-      "Segelhorst": { a: "", b: "", c: "", d: "", e: "", f: "" },
-      "Weibeck": { a: "", b: "", c: "", d: "", e: "", f: "" },
-      "Welsede": { a: "", b: "", c: "", d: "", e: "", f: "" },
-      "Wickbolsen": { a: "", b: "", c: "", d: "", e: "", f: "" },
-      "Zersen": { a: "", b: "", c: "", d: "", e: "", f: "" }
+      "Bensen": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
+      "Fischbeck": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
+      "Friedrichshagen": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
+      "Friedrichsburg": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
+      "Fuhlen": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
+      "Großenwieden": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
+      "Haddessen": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
+      "Heßlingen": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
+      "Hemeringen": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
+      "Hessisch Oldendorf": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
+      "Höfingen": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
+      "Kleinenwieden": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
+      "Krückeberg": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
+      "Lachem": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
+      "Langenfeld": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
+      "Pötzen": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
+      "Rohden": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
+      "Rumbeck": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
+      "Segelhorst": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
+      "Weibeck": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
+      "Welsede": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
+      "Wickbolsen": { Einw.: "", b: "", c: "", d: "", e: "", f: "" },
+      "Zersen": { Einw.: "", b: "", c: "", d: "", e: "", f: "" }
     };
 
     fetch('daten/hessisch_oldendorf.geojson')
@@ -84,7 +84,7 @@ nwohner<!DOCTYPE html>
               const daten = ortsdaten[ort] || {};
               const tooltipContent = `
                 <strong>${ort}</strong><br>
-                a) Einwohnerzahl: ${daten.a || '<em>noch einzutragen</em>'}<br>
+                a) Einwohnerzahl: ${daten.Einw. || '<em>noch einzutragen</em>'}<br>
                 b) Fläche: ${daten.b || '<em>noch einzutragen</em>'}<br>
                 c) Bevölkerungsdichte: ${daten.c || '<em>noch einzutragen</em>'}<br>
                 d) Ortsteilnummer: ${daten.d || '<em>noch einzutragen</em>'}<br>
