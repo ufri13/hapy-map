@@ -59,6 +59,9 @@ const ortsdaten = {
               fillOpacity: 0.3,
               weight: 1
             };
+              .catch(error => {
+    console.error("Fehler beim Laden der GeoJSON-Datei:", error);
+    alert("Die Karte konnte nicht geladen werden. Bitte später erneut versuchen.");
           },
           onEachFeature: function (feature, layer) {
             const ort = (feature.properties.Ortschaft || '').trim();
