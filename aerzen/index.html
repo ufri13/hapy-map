@@ -64,7 +64,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           onEachFeature: function (feature, layer) {
             const ort = (feature.properties.Ortschaft || '').trim();
 
-            if (ort !== 'Stadt Hessisch Oldendorf') {
+            if (ort !== 'Flecken Aerzen') {
               const daten = ortsdaten[ort];
               if (!daten) {
                 console.warn(`⚠️ Kein Datensatz für Ort: "${ort}"`);
