@@ -49,7 +49,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 };
 
 
-    fetch('daten/aerzen.geojson')
+    fetch('../daten/aerzen.geojson')
       .then(response => response.json())
       .then(data => {
         const geoLayer = L.geoJSON(data, {
