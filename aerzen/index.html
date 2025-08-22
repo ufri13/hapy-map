@@ -21,12 +21,12 @@
   <div id="map"></div>
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
-    const map = L.map('map').setView([52.1715, 9.2580], 9
-                                    );
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap',
-      maxZoom: 13
-    }).addTo(map);
+   const map = L.map('map').setView([52.0487, 9.2456], 13);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+  maxZoom: 18
+}).addTo(map);
+
 
     const ortsdaten = {
   "Aerzen": { einwohner: "–", flaeche: "", dichte: "", nummer: "", besonderheiten: "", sonstiges: "" },
